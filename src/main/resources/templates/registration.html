@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>PAT Registration</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" th:href="@{css/montserrat-font.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{fonts/material-design-iconic-font/css/material-design-iconic-font.min.css}">
+	<!-- Main Style CSS  -->
+    <link rel="stylesheet" th:href="@{css/style.css}"/>
+</head>
+<body class="form-v10">
+	<div class="page-content">
+		<div class="form-v10-content">
+         <div th:insert="common/header :: header">  </div>
+			<div class="alert alert-success info" role="alert" th:if="${registrationMsg != null}">
+	                <h1 th:text="${registrationMsg}"></h1>
+	         </div>
+			<h1 class="info bannerText">
+        		<span>Java Meetup Registration</span>
+        	</h1>
+			<form th:action="@{/registration}" th:object="${userData}" method="post" id="myform">
+				<div class="alert alert-danger fieldError info" th:if="${#fields.hasErrors('*')}">
+                    <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+         		</div>
+         		<div class="form-detail">
+				<div class="form-left">
+					<h2>General Information</h2>
+<!-- 					<div class="form-row"> -->
+<!-- 						<select name="title"> -->
+<!-- 						    <option class="option" value="title">Title</option> -->
+<!-- 						    <option class="option" value="businessman">Businessman</option> -->
+<!-- 						    <option class="option" value="reporter">Reporter</option> -->
+<!-- 						    <option class="option" value="secretary">Secretary</option> -->
+<!-- 						</select> -->
+<!-- 						<span class="select-btn"> -->
+<!-- 						  	<i class="zmdi zmdi-chevron-down"></i> -->
+<!-- 						</span> -->
+<!-- 					</div> -->
+					<div class="form-group">
+						<div class="form-row form-row-1">
+							<input type="text" th:field="*{firstName}" class="input-text" placeholder="First Name" required>
+							<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="fieldError">..</span>
+						</div>
+						<div class="form-row form-row-2">
+							<input type="text" th:field="*{lastName}" class="input-text" placeholder="Last Name" required>
+							<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="fieldError">..</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-row form-row-1">
+							<input type="password" th:field="*{password}" class="input-text" placeholder="Password" required>
+							<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">..</span>
+						</div>
+						<div class="form-row form-row-2">
+							<input type="password"  th:field="*{matchingPassword}" class="input-text" placeholder="Retype password" required>
+							<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">..</span>
+						</div>
+					</div>
+<!-- 					<div class="form-row"> -->
+<!-- 						<select name="position"> -->
+<!-- 						    <option value="position">Position</option> -->
+<!-- 						    <option value="director">Director</option> -->
+<!-- 						    <option value="manager">Manager</option> -->
+<!-- 						    <option value="employee">Employee</option> -->
+<!-- 						</select> -->
+<!-- 						<span class="select-btn"> -->
+<!-- 						  	<i class="zmdi zmdi-chevron-down"></i> -->
+<!-- 						</span> -->
+<!-- 					</div> -->
+<!-- 					<div class="form-row"> -->
+<!-- 						<input type="text" name="company" class="company" id="company" placeholder="Company" required> -->
+<!-- 					</div> -->
+<!-- 					<div class="form-group"> -->
+<!-- 						<div class="form-row form-row-3"> -->
+<!-- 							<input type="text" name="business" class="business" id="business" placeholder="Business Arena" required> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-row form-row-4"> -->
+<!-- 							<select name="employees"> -->
+<!-- 							    <option value="employees">Employees</option> -->
+<!-- 							    <option value="trainee">Trainee</option> -->
+<!-- 							    <option value="colleague">Colleague</option> -->
+<!-- 							    <option value="associate">Associate</option> -->
+<!-- 							</select> -->
+<!-- 							<span class="select-btn"> -->
+<!-- 							  	<i class="zmdi zmdi-chevron-down"></i> -->
+<!-- 							</span> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+				</div>
+				<div class="form-right">
+					<h2>Contact Details</h2>
+					<div class="form-row">
+						<input type="text" th:field="*{street}" class="street" placeholder="Street" required>
+							<span th:if="${#fields.hasErrors('street')}" th:errors="*{street}" class="fieldError">..</span>
+					</div>
+					<div class="form-row">
+						<input type="text" th:field="*{houseNumber}" class="street" placeholder="House number" required>
+							<span th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}" class="fieldError">..</span>
+					</div>
+					<div class="form-row">
+						<input type="text" th:field="*{zip}" class="street" placeholder="Zip" required>
+							<span th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}" class="fieldError">..</span>
+					</div>
+					<div class="form-row">
+						<input type="text" th:field="*{area}" class="street" placeholder="Area" required>
+							<span th:if="${#fields.hasErrors('area')}" th:errors="*{area}" class="fieldError">..</span>
+					</div>
+					<div class="form-row">
+						<input type="text" th:field="*{additional}" class="additional" placeholder="Additional Information">
+						<span th:if="${#fields.hasErrors('additional')}" th:errors="*{additional}" class="fieldError">..</span>
+					</div>
+<!-- 					<div class="form-group"> -->
+<!-- 						<div class="form-row form-row-1"> -->
+<!-- 							<input type="text" name="zip" class="zip" id="zip" placeholder="Zip Code" required> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-row form-row-2"> -->
+<!-- 							<select name="place"> -->
+<!-- 							    <option value="place">Place</option> -->
+<!-- 							    <option value="Street">Street</option> -->
+<!-- 							    <option value="District">District</option> -->
+<!-- 							    <option value="City">City</option> -->
+<!-- 							</select> -->
+<!-- 							<span class="select-btn"> -->
+<!-- 							  	<i class="zmdi zmdi-chevron-down"></i> -->
+<!-- 							</span> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+					<div class="form-row">
+						<select th:field="*{country}" required>
+						    <option value="DE">Germany</option>
+						</select>
+						<span class="select-btn">
+						  	<i class="zmdi zmdi-chevron-down"></i>
+						</span>
+						<span th:if="${#fields.hasErrors('country')}" th:errors="*{country}" class="fieldError">..</span>
+					</div>
+<!-- 					<div class="form-group"> -->
+<!-- 						<div class="form-row form-row-1"> -->
+<!-- 							<input type="text" name="code" class="code" id="code" placeholder="Code +" required> -->
+<!-- 						</div> -->
+						<div class="form-row">
+							<input type="text" th:field="*{phoneNumber}" class="phone" placeholder="Phone Number">
+							<span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="fieldError">..</span>
+						</div>
+<!-- 					</div> -->
+					<div class="form-row">
+						<input type="email" th:field="*{email}" class="input-text" required placeholder="Your Email">
+						<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">..</span>
+					</div>
+					<div class="form-checkbox">
+						<label class="container"><p>I do accept the <a href="#" class="text">Terms and Conditions</a> of your site.</p>
+						  	<input type="checkbox" name="checkbox">
+						  	<span class="checkmark"></span>
+						</label>
+					</div>
+					<div class="form-row-last">
+						<input type="submit" name="register" class="register" value="Register">
+					</div>
+				</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
